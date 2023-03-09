@@ -1,24 +1,36 @@
 package application;
 
-import java.io.File;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import entities.Employees;
 
 public class Program {
 
 	public static void main(String[] args) {
 
-		Scanner leia = new Scanner(System.in);
-
-		System.out.println("Enter a file path: ");
-		String strPath = leia.nextLine();
+		List<Employees> list = new ArrayList<>();
+		String path = "C:\\temp\\in.txt";
 		
-		File path = new File(strPath);
-		
-		System.out.println("getName: "+path.getName());
-		System.out.println("getParent: "+path.getParent());
-		System.out.println("getPath: "+path.getPath());
-
-		leia.close();
-
+		try(BufferedReader br = new BufferedReader(new FileReader(path))){
+			
+			String employeeCsv = br.readLine();
+			while(employeeCsv != null) {
+				
+				String[] fields = employeeCsv.split(",");
+				list.add(new Employees(fields[0], Double.parseDouble(fields[1])));
+				employeeCsv = br.readLine();
+			}
+			Collections.sort(list);
+			for(Employees emp : list) {
+				System.out.println(emp.getName() +", "+ emp.getSalary());
+			}
+		} catch(IOException e) {
+			System.out.println("Error: "+ e.getMessage());
+		}
 	}
 }
