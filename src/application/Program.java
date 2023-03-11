@@ -1,36 +1,27 @@
 package application;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Scanner;
 
-import entities.Employees;
+import services.InterestService;
+import services.UsaInterestService;
 
 public class Program {
 
 	public static void main(String[] args) {
 
-		List<Employees> list = new ArrayList<>();
-		String path = "C:\\temp\\in.txt";
+		Scanner leia = new Scanner (System.in);
 		
-		try(BufferedReader br = new BufferedReader(new FileReader(path))){
-			
-			String employeeCsv = br.readLine();
-			while(employeeCsv != null) {
-				
-				String[] fields = employeeCsv.split(",");
-				list.add(new Employees(fields[0], Double.parseDouble(fields[1])));
-				employeeCsv = br.readLine();
-			}
-			Collections.sort(list);
-			for(Employees emp : list) {
-				System.out.println(emp.getName() +", "+ emp.getSalary());
-			}
-		} catch(IOException e) {
-			System.out.println("Error: "+ e.getMessage());
-		}
+		System.out.print("Amount: ");
+		double amount = leia.nextDouble();
+		System.out.print("Months: ");
+		int months = leia.nextInt();
+		
+		InterestService is = new UsaInterestService(1.0);
+		double payment = is.payment(amount, months);
+		
+		System.out.println("Payment after "+ months +" months: ");
+		System.out.println(String.format("%.2f", payment));
+		
+		leia.close();
 	}
 }
