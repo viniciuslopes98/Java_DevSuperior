@@ -2,8 +2,7 @@ package application;
 
 import java.util.Scanner;
 
-import services.InterestService;
-import services.UsaInterestService;
+import services.PrintService;
 
 public class Program {
 
@@ -11,16 +10,19 @@ public class Program {
 
 		Scanner leia = new Scanner (System.in);
 		
-		System.out.print("Amount: ");
-		double amount = leia.nextDouble();
-		System.out.print("Months: ");
-		int months = leia.nextInt();
+		PrintService<Integer> ps = new PrintService<>();
 		
-		InterestService is = new UsaInterestService(1.0);
-		double payment = is.payment(amount, months);
+		System.out.print("How many values? ");
+		int n = leia.nextInt();
 		
-		System.out.println("Payment after "+ months +" months: ");
-		System.out.println(String.format("%.2f", payment));
+		for(int i = 0; i <n;i++) {
+			int value = leia.nextInt();
+			ps.addValue(value);
+		}
+		
+		ps.print();
+		Integer x = ps.first();
+		System.out.println("First: "+ x);
 		
 		leia.close();
 	}
