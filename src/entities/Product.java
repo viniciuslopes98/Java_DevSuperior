@@ -1,10 +1,10 @@
 package entities;
 
-public class Product implements Comparable<Product>{
+public class Product implements Comparable<Product> {
 
 	public String name;
 	public Double price;
-	
+
 	public Product(String name, Double price) {
 		this.name = name;
 		this.price = price;
@@ -35,7 +35,5 @@ public class Product implements Comparable<Product>{
 	public int compareTo(Product o) {
 		return price.compareTo(o.getPrice());
 	}
-	
-	
-	
+
 }
