@@ -1,24 +1,21 @@
 package application;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Program {
-//      Com tipos curinga podemos fazer métodos
-//		que recebem um genérico de "qualquer tipo":
-//      
-//		NOTA: Não é possível adicionar dados a uma
-//		coleção de tipo curinga.
 
+//  Princípio get/put - Covariância :
+	
 	public static void main(String[] args) {
-		List<Integer> myInts = Arrays.asList(5, 2, 10);
-		printList(myInts);
-	}
+		List<Integer> intList = new ArrayList<Integer>();
+		intList.add(10);
+		intList.add(5);
+		List<? extends Number> list = intList;
+		Number x = list.get(0);
+	//	list.add(20);  erro de compilacao
+	
 
-	public static void printList(List<?> list) {
-//		list.add(3); Erro de compilação  --> O compilador não sabe qual é o tipo específico do qual a lista foi instanciada.
-		for (Object obj : list) {
-			System.out.println(obj);
-		}
+
 	}
 }
