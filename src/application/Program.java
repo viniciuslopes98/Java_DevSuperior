@@ -1,27 +1,45 @@
 package application;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
-import entities.Product_map;
+import entities.Productt;
 
 public class Program {
 
 	public static void main(String[] args) {
 
-		Map<Product_map, Double> stock = new HashMap<>();
+		List<Productt> list = new ArrayList<>();
+
+		list.add(new Productt("TV", 900.00));
+		list.add(new Productt("Notebook", 1200.00));
+		list.add(new Productt("Tablet", 450.00));
+
+//		Outra forma de usar o comparator é declarando uma classe anônima:
+
+//		Comparator<Productt> comp = new Comparator<Productt>() {
+//
+//			@Override
+//			public int compare(Productt p1, Productt p2) {
+//				return p1.getName().toUpperCase().compareTo(p2.getName().toUpperCase());
+//			}
+//
+//		};
+
+//		Uma forma mais "enxuta" de usar o comparator é em Expressão Lambda 
+//		em função anônima(Arrow function):
 		
-		Product_map p1 = new Product_map("Tv", 900.0);
-		Product_map p2 = new Product_map("Notebook", 1200.0);
-		Product_map p3 = new Product_map("Tablet", 400.0);
+//		Comparator<Productt> comp = (p1, p2) -> {
+//			return p1.getName().toUpperCase().compareTo(p2.getName().toUpperCase());
+//		};
+
+//		Ainda é possível resumir mais, deixando da seguinte forma:
 		
-		stock.put(p1, 10000.0);
-		stock.put(p2, 20000.0);
-		stock.put(p3, 15000.0);
-		
-		Product_map ps = new Product_map("Tv", 900.0);
-		
-		System.out.println("Contains 'ps' key: " + stock.containsKey(ps));
-	
+		list.sort((p1, p2) -> p1.getName().toUpperCase().compareTo(p2.getName().toUpperCase()));
+
+		for (Productt p : list) {
+			System.out.println(p);
+		}
 	}
 }
