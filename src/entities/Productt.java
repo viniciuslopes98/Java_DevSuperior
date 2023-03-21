@@ -31,13 +31,6 @@ public class Productt {
 		this.price = price;
 	}
 
-	public static String staticUpperCaseName(Productt p) {
-		return p.getName().toUpperCase();
-	}
-	
-	public String nonStaticUpperCaseName() {
-		return name.toUpperCase();
-	}
 	
 	@Override
 	public String toString() {
