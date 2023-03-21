@@ -2,10 +2,11 @@ package application;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import entities.Productt;
-import util.PriceUpdate;
+import util.UpperCaseName;
 
 public class Program {
 
@@ -18,18 +19,24 @@ public class Program {
 		list.add(new Productt("Tablet", 350.50));
 		list.add(new Productt("HD Case", 80.90));
 
-		double factor = 1.1;
+		Function<Productt, String> func = p -> p.getName().toUpperCase();
 		
-		Consumer<Productt> cons = p -> p.setPrice(p.getPrice() * factor);
+//		Exemplo 1 --> Padrão, implementação da interface.
+//		List<String> names = list.stream().map(new UpperCaseName()).collect(Collectors.toList());
+
+//		Exemplo 2 --> Referência ao método, com método static.
+//		List<String> names = list.stream().map(Productt::staticUpperCaseName).collect(Collectors.toList());
 		
+//		Exemplo 3 --> Referência ao método, com método NÃO static.
+//		List<String> names = list.stream().map(Productt::nonStaticUpperCaseName).collect(Collectors.toList());
 		
-//		list.forEach(new PriceUpdate()); Exemplo 1 --> Implementação da interface padrão.
-//		list.forEach(Productt::staticPriceUpdate); Exemplo 2 --> Referência para o método, método static.
-//		list.forEach(Productt::nonStaticPriceUpdate); Exemplo 3 --> Referência para o método, método NÃO static.
-//		list.forEach(cons); Exemplo 4 --> Expressão lambda declarada.
-		list.forEach(p -> p.setPrice(p.getPrice() * factor)); // Exemplo 5 --> Expressão lambda inline.
+//		Exemplo 4 --> Expressão lambda declarada.
+//		List<String> names = list.stream().map(func).collect(Collectors.toList());
 		
-		list.forEach(System.out::println);
+//		Exemplo 5 --> Expressão lambda inline.
+		List<String> names = list.stream().map(p -> p.getName().toUpperCase()).collect(Collectors.toList());
+		
+		names.forEach(System.out::println);
 	}
 
 }
